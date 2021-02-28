@@ -17,9 +17,17 @@
             v-model="password"
             show-password
           ></el-input>
-          <el-button type="success" native-type="submit" :loading="isSubmitting"
-            >Войти
-          </el-button>
+          <div class="card__footer">
+            <el-button
+              type="success"
+              native-type="submit"
+              :loading="isSubmitting"
+              >Войти
+            </el-button>
+            <router-link :to="{ name: 'register' }"
+              >Ещё нет аккаунта?</router-link
+            >
+          </div>
         </form>
       </el-card>
     </el-col>
@@ -67,5 +75,11 @@ export default {
 
 .input {
   margin-bottom: 10px;
+}
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 </style>
