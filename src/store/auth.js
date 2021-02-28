@@ -10,11 +10,16 @@ export const getterTypes = {
 export const mutationTypes = {
   loginStart: "[auth] login start",
   loginSuccess: "[auth] login success",
-  loginFailure: "[auth] login failure"
+  loginFailure: "[auth] login failure",
+
+  registerStart: "[auth] register start",
+  registerSuccess: "[auth] register success",
+  registerFailure: "[auth] register failure"
 };
 
 export const actionTypes = {
-  login: "[auth] login"
+  login: "[auth] login",
+  register: "[auth] register"
 };
 
 const state = {
