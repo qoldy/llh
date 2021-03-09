@@ -25,8 +25,8 @@
               >Войти
             </el-button>
             <router-link :to="{ name: 'register' }"
-              >Ещё нет аккаунта?</router-link
-            >
+              >Ещё нет аккаунта?
+            </router-link>
           </div>
         </form>
       </el-card>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { getterTypes } from "@/store/auth";
+import { getterTypes, actionTypes } from "@/store/auth";
 import { mapGetters } from "vuex";
 
 export default {
@@ -49,10 +49,26 @@ export default {
   computed: {
     ...mapGetters({
       isSubmitting: getterTypes.isSubmitting
-    })
+    }),
+    userCredentials() {
+      return {
+        email: this.email,
+        password: this.password
+      };
+    }
   },
   methods: {
-    submitHandler() {}
+    submitHandler() {
+      this.$store
+        .dispatch(actionTypes.login, { userCredentials: this.userCredentials })
+        .then(() => {
+          this.$message({
+            message: "Добро пожаловать",
+            type: "success"
+          });
+          this.$router.push({ name: "home" });
+        });
+    }
   }
 };
 </script>

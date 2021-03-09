@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { getterTypes } from "@/store/auth";
+import { getterTypes, actionTypes } from "@/store/auth";
 import { mapGetters } from "vuex";
 
 export default {
@@ -56,10 +56,30 @@ export default {
   computed: {
     ...mapGetters({
       isSubmitting: getterTypes.isSubmitting
-    })
+    }),
+    userCredentials() {
+      return {
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        password_confirmation: this.passwordConfirmation
+      };
+    }
   },
   methods: {
-    submitHandler() {}
+    submitHandler() {
+      this.$store
+        .dispatch(actionTypes.register, {
+          userCredentials: this.userCredentials
+        })
+        .then(() => {
+          this.$message({
+            message: "Ваш аккаунт успешно создан. Теперь в него можно войти",
+            type: "success"
+          });
+          this.$router.push({ name: "login" });
+        });
+    }
   }
 };
 </script>
