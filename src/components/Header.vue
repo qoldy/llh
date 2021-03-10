@@ -66,7 +66,8 @@ export default {
       this.$store
         .dispatch(actionTypes.logout)
         .then(() => {
-          if (this.$route.name !== "home") this.$router.push({ name: "home" });
+          if (this.$route.name !== "welcome")
+            this.$router.push({ name: "welcome" });
         })
         .catch(() => {});
     }
