@@ -2,6 +2,7 @@
   <div>
     <el-row>
       <el-col :span="24">
+        <AppSleepList />
         <AppPusleList />
       </el-col>
     </el-row>
@@ -10,11 +11,13 @@
 
 <script>
 import AppPusleList from "@/components/PulseList";
+import AppSleepList from "@/components/SleepList";
 
 export default {
   name: "Home",
   components: {
-    AppPusleList
+    AppPusleList,
+    AppSleepList
   }
 };
 </script>
