@@ -1,9 +1,20 @@
 <template>
-  <div>Home</div>
+  <div>
+    <el-row>
+      <el-col :span="24">
+        <AppPusleList />
+      </el-col>
+    </el-row>
+  </div>
 </template>
 
 <script>
+import AppPusleList from "@/components/PulseList";
+
 export default {
-  name: "Home"
+  name: "Home",
+  components: {
+    AppPusleList
+  }
 };
 </script>
