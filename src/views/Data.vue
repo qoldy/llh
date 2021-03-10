@@ -2,11 +2,14 @@
   <div>
     <el-row>
       <el-col :span="24">
-        <el-tabs type="border-card" @tab-click="clickHandler">
-          <el-tab-pane label="Пульс">
+        <el-tabs type="border-card" v-model="activeTabName">
+          <el-tab-pane label="Пульс" name="pulse">
             <router-view />
           </el-tab-pane>
-          <el-tab-pane label="Сон">
+          <el-tab-pane label="Сон" name="sleep">
+            <router-view />
+          </el-tab-pane>
+          <el-tab-pane label="Температура" name="temperature">
             <router-view />
           </el-tab-pane>
         </el-tabs>
@@ -18,21 +21,53 @@
 <script>
 export default {
   name: "Data",
-  methods: {
-    clickHandler(tab) {
+  data() {
+    return {
+      activeTabName: ""
+    };
+  },
+  watch: {
+    activeTabName(newValue) {
       let routeName = "";
 
-      switch (tab.label) {
-        case "Сон":
+      switch (newValue) {
+        case "sleep":
           routeName = "sleepList";
           break;
-        case "Пульс":
+        case "pulse":
           routeName = "pulseList";
+          break;
+        case "temperature":
+          routeName = "temperatureList";
           break;
       }
 
-      this.$router.push({ name: routeName });
+      if (this.$route.name !== routeName)
+        this.$router.push({ name: routeName });
     }
+  },
+  methods: {
+    getActiveTabName() {
+      const routeName = this.$route.name;
+      let tabName = "";
+
+      switch (routeName) {
+        case "sleepList":
+          tabName = "sleep";
+          break;
+        case "pulseList":
+          tabName = "pulse";
+          break;
+        case "temperatureList":
+          tabName = "temperature";
+          break;
+      }
+
+      return tabName;
+    }
+  },
+  created() {
+    this.activeTabName = this.getActiveTabName();
   }
 };
 </script>
