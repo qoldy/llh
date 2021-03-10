@@ -66,7 +66,7 @@ export default {
             message: "Добро пожаловать",
             type: "success"
           });
-          this.$router.push({ name: "home" });
+          this.$router.push({ name: "data" });
         });
     }
   }
