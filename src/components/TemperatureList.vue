@@ -1,5 +1,10 @@
 <template>
-  <el-table :data="pulseList" stripe style="width: 100%" v-loading="isLoading">
+  <el-table
+    :data="temperatureList"
+    stripe
+    style="width: 100%"
+    v-loading="isLoading"
+  >
     <el-table-column
       prop="measurement_time"
       label="Время измерения"
@@ -9,23 +14,20 @@
 </template>
 
 <script>
-import { actionTypes, getterTypes } from "@/store/pulseList";
+import { actionTypes, getterTypes } from "@/store/temperatureList";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "PulseList",
-  data() {
-    return {};
-  },
+  name: "SleepList",
   computed: {
     ...mapGetters({
-      pulseList: getterTypes.pulseList,
+      temperatureList: getterTypes.temperatureList,
       isLoading: getterTypes.isLoading,
       isEmpty: getterTypes.isEmpty
     })
   },
   created() {
-    this.$store.dispatch(actionTypes.getPulseList);
+    this.$store.dispatch(actionTypes.getTemperatureList);
   }
 };
 </script>

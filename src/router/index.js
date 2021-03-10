@@ -34,6 +34,11 @@ const routes = [
         path: "sleep",
         name: "sleepList",
         component: () => import("@/components/SleepList")
+      },
+      {
+        path: "temperature",
+        name: "temperatureList",
+        component: () => import("@/components/TemperatureList")
       }
     ]
   }
