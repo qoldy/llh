@@ -97,7 +97,8 @@ export default {
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.2);
   display: flex;
-  align-items: center;
+  padding-top: 50px;
+  align-items: flex-start;
   justify-content: center;
 }
 </style>

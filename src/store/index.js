@@ -5,6 +5,7 @@ import pulseList from "@/store/pulseList";
 import sleepList from "@/store/sleepList";
 import temperatureList from "@/store/temperatureList";
 import pulse from "@/store/pulse";
+import sleep from "@/store/sleep";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
     pulseList,
     sleepList,
     temperatureList,
-    pulse
+    pulse,
+    sleep
   }
 });
