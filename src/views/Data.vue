@@ -26,51 +26,34 @@ export default {
   name: "Data",
   data() {
     return {
-      activeTabName: ""
+      dictionary: {
+        sleep: "sleepList",
+        pulse: "pulseList",
+        temperature: "temperatureList"
+      }
     };
   },
-  watch: {
-    activeTabName(newValue) {
-      let routeName = "";
-
-      switch (newValue) {
-        case "sleep":
-          routeName = "sleepList";
-          break;
-        case "pulse":
-          routeName = "pulseList";
-          break;
-        case "temperature":
-          routeName = "temperatureList";
-          break;
+  computed: {
+    activeTabName: {
+      get() {
+        return this.convertRouteNameToTabName(this.$route.name);
+      },
+      set(tabName) {
+        const routeName = this.convertTabNameToRouteName(tabName);
+        if (this.$route.name !== routeName)
+          this.$router.push({ name: routeName });
       }
-
-      if (this.$route.name !== routeName)
-        this.$router.push({ name: routeName });
     }
   },
   methods: {
-    getActiveTabName() {
-      const routeName = this.$route.name;
-      let tabName = "";
-
-      switch (routeName) {
-        case "sleepList":
-          tabName = "sleep";
-          break;
-        case "pulseList":
-          tabName = "pulse";
-          break;
-        case "temperatureList":
-          tabName = "temperature";
-          break;
-      }
-
-      return tabName;
+    convertTabNameToRouteName(tabName) {
+      return this.dictionary[tabName];
+    },
+    convertRouteNameToTabName(routeName) {
+      return Object.keys(this.dictionary).find(
+        tabName => this.dictionary[tabName] === routeName
+      );
     }
-  },
-  created() {
-    this.activeTabName = this.getActiveTabName();
   }
 };
 </script>
