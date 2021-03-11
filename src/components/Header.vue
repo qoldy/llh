@@ -1,15 +1,11 @@
 <template>
   <el-row class="header el-menu el-menu--horizontal">
+    <div class="left-area">
+      <router-link tag="h1" :to="{ name: 'data' }" class="logo"
+        >Линия жизни
+      </router-link>
+    </div>
     <template v-if="!isLoading">
-      <div class="left-area">
-        <router-link
-          v-if="isAnonymous"
-          tag="h1"
-          :to="{ name: 'home' }"
-          class="logo"
-          >Todo
-        </router-link>
-      </div>
       <ul class="menu">
         <template v-if="isAnonymous">
           <router-link
