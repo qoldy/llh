@@ -27,6 +27,19 @@ export default {
       maintainAspectRatio: false,
       animation: {
         duration: 0
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              min: 30
+            }
+          }
+        ]
+      },
+      tooltips: {
+        mode: "index",
+        intersect: false
       }
     }
   }),

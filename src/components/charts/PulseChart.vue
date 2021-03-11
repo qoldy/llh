@@ -26,6 +26,19 @@ export default {
       maintainAspectRatio: false,
       animation: {
         duration: 0
+      },
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true
+            }
+          }
+        ]
+      },
+      tooltips: {
+        mode: "index",
+        intersect: false
       }
     }
   }),
