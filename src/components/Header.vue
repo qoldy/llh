@@ -1,28 +1,38 @@
 <template>
   <el-row class="header el-menu el-menu--horizontal">
     <div class="left-area">
-      <router-link tag="h1" :to="{ name: 'data' }" class="logo"
-        >Линия жизни
+      <router-link :to="{ name: 'data' }" custom v-slot="{ navigate }">
+        <h1 @click="navigate" class="logo">
+          Линия жизни
+        </h1>
       </router-link>
     </div>
     <template v-if="!isLoading">
       <ul class="menu">
         <template v-if="isAnonymous">
           <router-link
-            tag="li"
-            class="el-menu-item"
-            active-class="is-active"
             :to="{ name: 'login' }"
+            custom
+            v-slot="{ navigate, isActive }"
           >
-            Войти
+            <li
+              @click="navigate"
+              :class="{ 'el-menu-item': true, 'is-active': isActive }"
+            >
+              Войти
+            </li>
           </router-link>
           <router-link
-            tag="li"
-            class="el-menu-item"
-            active-class="is-active"
             :to="{ name: 'register' }"
+            custom
+            v-slot="{ navigate, isActive }"
           >
-            Зарегистрироваться
+            <li
+              @click="navigate"
+              :class="{ 'el-menu-item': true, 'is-active': isActive }"
+            >
+              Зарегистрироваться
+            </li>
           </router-link>
         </template>
         <template v-if="isAuth">
@@ -35,8 +45,8 @@
               name: 'createTask',
               params: { projectId: this.$route.params.projectId }
             }"
-            >Создать задачу</router-link
-          >
+            >Создать задачу
+          </router-link>
           <li class="el-menu-item" @click="logout">Выйти</li>
         </template>
       </ul>
