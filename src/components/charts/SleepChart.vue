@@ -24,7 +24,10 @@ export default {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      animation: {
+        duration: 0
+      }
     }
   }),
   watch: {

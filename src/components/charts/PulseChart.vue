@@ -1,13 +1,12 @@
-<canvas ref="canvas" class="chart"></canvas>
+<canvas v-else ref="canvas" class="chart"></canvas>
 
 <script>
 import { Line } from "vue-chartjs";
 import { mapGetters } from "vuex";
 import { getterTypes as pulseListGetterTypes } from "@/store/pulseList";
-import { getterTypes as sleepListGetterTypes } from "@/store/sleepList";
-import { getterTypes as temperatureListGetterTypes } from "@/store/temperatureList";
 
 export default {
+  name: "PulseChart",
   extends: Line,
   data: () => ({
     chartdata: {
@@ -18,13 +17,16 @@ export default {
           backgroundColor: "rgb(22,199,154)",
           borderColor: "rgba(22,199,154, 0.5)",
           fill: false,
-          data: []
+          data: [0, 0]
         }
       ]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+      animation: {
+        duration: 0
+      }
     }
   }),
   watch: {
@@ -45,7 +47,6 @@ export default {
           this.chartdata.labels = labels;
           this.chartdata.datasets[0].data = data;
           if (this.$data._chart) this.$data._chart.update();
-          console.log("update");
         }
       }
     }
@@ -53,8 +54,7 @@ export default {
   computed: {
     ...mapGetters({
       pulseList: pulseListGetterTypes.pulseList,
-      sleepList: sleepListGetterTypes.sleepList,
-      temperatureList: temperatureListGetterTypes.temperatureList
+      isLoading: pulseListGetterTypes.isLoading
     }),
     cleanCurrentData() {
       switch (this.$route.name) {
@@ -71,9 +71,6 @@ export default {
   },
   mounted() {
     this.renderChart(this.chartdata, this.options);
-  },
-  updated() {
-    console.log("updated chart");
   }
 };
 </script>
