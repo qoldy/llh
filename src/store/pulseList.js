@@ -29,7 +29,6 @@ const getters = {
 
 const mutations = {
   [mutationTypes.getPulseListStart](state) {
-    state.data = null;
     state.isLoading = true;
   },
   [mutationTypes.getPulseListSuccess](state, pulseDataList) {

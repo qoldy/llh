@@ -29,7 +29,6 @@ const getters = {
 
 const mutations = {
   [mutationTypes.getSleepListStart](state) {
-    state.data = null;
     state.isLoading = true;
   },
   [mutationTypes.getSleepListSuccess](state, sleepDataList) {

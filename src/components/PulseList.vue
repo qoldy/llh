@@ -45,7 +45,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(actionTypes.getPulseList);
+    if (!this.pulseList) this.$store.dispatch(actionTypes.getPulseList);
   }
 };
 </script>

@@ -1,16 +1,19 @@
 <template>
   <div>
     <el-row>
+      <div class="chart">
+        <router-view name="chart" />
+      </div>
       <el-col :span="24">
         <el-tabs type="border-card" v-model="activeTabName">
           <el-tab-pane label="Пульс" name="pulse">
-            <router-view />
+            <router-view name="pulseList" />
           </el-tab-pane>
           <el-tab-pane label="Сон" name="sleep">
-            <router-view />
+            <router-view name="sleepList" />
           </el-tab-pane>
           <el-tab-pane label="Температура" name="temperature">
-            <router-view />
+            <router-view name="temperatureList" />
           </el-tab-pane>
         </el-tabs>
       </el-col>
@@ -71,3 +74,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.chart {
+  margin-bottom: 25px;
+}
+</style>

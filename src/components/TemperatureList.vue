@@ -42,7 +42,8 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(actionTypes.getTemperatureList);
+    if (!this.temperatureList)
+      this.$store.dispatch(actionTypes.getTemperatureList);
   }
 };
 </script>

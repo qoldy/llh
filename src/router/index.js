@@ -28,17 +28,26 @@ const routes = [
       {
         path: "pulse",
         name: "pulseList",
-        component: () => import("@/components/PulseList")
+        components: {
+          chart: () => import("@/components/charts/PulseChart"),
+          pulseList: () => import("@/components/PulseList")
+        }
       },
       {
         path: "sleep",
         name: "sleepList",
-        component: () => import("@/components/SleepList")
+        components: {
+          chart: () => import("@/components/charts/SleepChart"),
+          sleepList: () => import("@/components/SleepList")
+        }
       },
       {
         path: "temperature",
         name: "temperatureList",
-        component: () => import("@/components/TemperatureList")
+        components: {
+          chart: () => import("@/components/charts/TemperatureChart"),
+          temperatureList: () => import("@/components/TemperatureList")
+        }
       }
     ]
   }

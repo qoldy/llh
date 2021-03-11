@@ -29,7 +29,6 @@ const getters = {
 
 const mutations = {
   [mutationTypes.getTemperatureListStart](state) {
-    state.data = null;
     state.isLoading = true;
   },
   [mutationTypes.getTemperatureListSuccess](state, temperatureDataList) {

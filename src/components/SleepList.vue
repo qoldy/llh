@@ -37,7 +37,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch(actionTypes.getSleepList);
+    if (!this.sleepList) this.$store.dispatch(actionTypes.getSleepList);
   }
 };
 </script>
