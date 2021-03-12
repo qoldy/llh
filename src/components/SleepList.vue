@@ -7,7 +7,7 @@
     <el-table
       :data="localSleepList"
       stripe
-      style="width: 100%"
+      style="width: 100%; min-height: 300px"
       v-loading="isLoading"
     >
       <!-- Дата сна -->

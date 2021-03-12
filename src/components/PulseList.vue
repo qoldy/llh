@@ -6,7 +6,7 @@
     <el-table
       :data="localPulseList"
       stripe
-      style="width: 100%"
+      style="width: 100%; min-height: 300px"
       v-loading="isLoading"
     >
       <!-- Время измерения -->
