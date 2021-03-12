@@ -4,7 +4,7 @@
       <el-button @click="toggleAddForm" type="success">Добавить</el-button>
     </div>
     <el-table
-      :data="localePulseList"
+      :data="localPulseList"
       stripe
       style="width: 100%"
       v-loading="isLoading"
@@ -13,13 +13,14 @@
       <el-table-column prop="measurement_time" label="Время измерения">
         <template slot-scope="scope">
           <span v-if="!scope.row.isEditing">{{
-            scope.row.measurement_time
+            scope.row.localeMeasurementTime
           }}</span>
           <el-date-picker
             v-else
             v-model="scope.row.newValues.measurement_time"
             :disabled="isPulseSubmitting"
             type="datetime"
+            format="dd.MM.yyyy hh:mm"
             placeholder="Новое время"
           >
           </el-date-picker>
@@ -116,14 +117,14 @@ export default {
   data() {
     return {
       isAddFormOpen: false,
-      localePulseList: null
+      localPulseList: null
     };
   },
   watch: {
     pulseList: {
       immediate: true,
       handler(newValue) {
-        this.localePulseList = this.preparePulseList(newValue);
+        this.localPulseList = this.preparePulseList(newValue);
       }
     }
   },
@@ -140,7 +141,7 @@ export default {
       this.isAddFormOpen = !this.isAddFormOpen;
     },
     editPulseHandler(pulseId) {
-      this.localePulseList.map(item => {
+      this.localPulseList.map(item => {
         if (item.id === pulseId) {
           item.isEditing = true;
           item.newValues.measurement_time = item.measurement_time;
@@ -150,7 +151,7 @@ export default {
       });
     },
     cancelEditPulseHandler(pulseId) {
-      this.localePulseList.map(item => {
+      this.localPulseList.map(item => {
         if (item.id === pulseId) {
           item.isEditing = false;
           item.newValues.measurement_time = null;
@@ -170,7 +171,7 @@ export default {
       return this.$store.dispatch(pulseListActionTypes.getPulseList);
     },
     submitPulseHandler(pulseId) {
-      const submittingData = this.localePulseList.find(
+      const submittingData = this.localPulseList.find(
         item => item.id === pulseId
       ).newValues;
       submittingData.measurement_time = dateHelper.convertToDatetime(
@@ -195,7 +196,7 @@ export default {
               const time = new Date(item.measurement_time)
                 .toLocaleTimeString()
                 .slice(0, -3);
-              item.measurement_time = `${date} ${time}`;
+              item.localeMeasurementTime = `${date} ${time}`;
               item.isEditing = false;
               item.newValues = {
                 measurement_time: null,
@@ -220,6 +221,7 @@ export default {
 
 .add-form__layer {
   position: absolute;
+  z-index: 1;
   left: 0;
   right: 0;
   top: 0;
