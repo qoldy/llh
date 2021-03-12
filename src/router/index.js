@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import store from "@/store/index";
+import { getterTypes, actionTypes } from "@/store/auth";
 
 Vue.use(VueRouter);
 
@@ -7,17 +9,26 @@ const routes = [
   {
     path: "/",
     name: "welcome",
-    component: () => import("../views/WelcomePage")
+    component: () => import("../views/WelcomePage"),
+    meta: {
+      isFree: true
+    }
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("../views/Login")
+    component: () => import("../views/Login"),
+    meta: {
+      isFree: true
+    }
   },
   {
     path: "/register",
     name: "register",
-    component: () => import("../views/Register")
+    component: () => import("../views/Register"),
+    meta: {
+      isFree: true
+    }
   },
   {
     path: "/data",
@@ -57,6 +68,26 @@ const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach(async (to, from, next) => {
+  let isAuth = store.getters[getterTypes.isAuth];
+
+  if (to.meta.isFree) {
+    next();
+  } else {
+    if (isAuth) {
+      next();
+    } else {
+      await store.dispatch(actionTypes.getUser);
+      isAuth = store.getters[getterTypes.isAuth];
+      if (isAuth) {
+        next();
+      } else {
+        next({ name: "login" });
+      }
+    }
+  }
 });
 
 export default router;

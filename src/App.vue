@@ -11,15 +11,11 @@
 
 <script>
 import AppHeader from "@/components/Header";
-import { actionTypes } from "@/store/auth";
 
 export default {
   name: "App",
   components: {
     AppHeader
-  },
-  mounted() {
-    this.$store.dispatch(actionTypes.getUser);
   }
 };
 </script>
