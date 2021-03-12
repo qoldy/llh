@@ -160,7 +160,11 @@ export default {
       });
     },
     deletePulseHandler(pulseId) {
-      console.log("delete", pulseId);
+      this.$store
+        .dispatch(pulseActionTypes.deletePulse, { pulseId: pulseId })
+        .then(() => {
+          this.$store.dispatch(pulseListActionTypes.getPulseList);
+        });
     },
     getPulseList() {
       return this.$store.dispatch(pulseListActionTypes.getPulseList);
