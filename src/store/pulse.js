@@ -10,11 +10,16 @@ export const getterTypes = {
 export const mutationTypes = {
   addPulseStart: "[pulse] add pulse start",
   addPulseSuccess: "[pulse] add pulse success",
-  addPulseFailure: "[pulse] add pulse failure"
+  addPulseFailure: "[pulse] add pulse failure",
+
+  editPulseStart: "[pulse] edit pulse start",
+  editPulseSuccess: "[pulse] edit pulse success",
+  editPulseFailure: "[pulse] edit pulse failure"
 };
 
 export const actionTypes = {
-  addPulse: "[pulse] add pulse"
+  addPulse: "[pulse] add pulse",
+  editPulse: "[pulse] edit pulse"
 };
 
 const state = {
@@ -42,6 +47,18 @@ const mutations = {
   [mutationTypes.addPulseFailure](state, errors) {
     state.isSubmitting = false;
     state.errors = errors;
+  },
+
+  [mutationTypes.editPulseStart](state) {
+    state.isSubmitting = true;
+    state.errors = null;
+  },
+  [mutationTypes.editPulseSuccess](state) {
+    state.isSubmitting = false;
+  },
+  [mutationTypes.editPulseFailure](state, errors) {
+    state.isSubmitting = false;
+    state.errors = errors;
   }
 };
 
@@ -53,6 +70,16 @@ const actions = {
       commit(mutationTypes.addPulseSuccess);
     } catch (e) {
       commit(mutationTypes.addPulseFailure, e.response.data);
+      throw e;
+    }
+  },
+  async [actionTypes.editPulse]({ commit }, { pulseId, pulseData }) {
+    try {
+      commit(mutationTypes.editPulseStart);
+      await pulseApi.edit(pulseId, pulseData);
+      commit(mutationTypes.editPulseSuccess);
+    } catch (e) {
+      commit(mutationTypes.editPulseFailure, e.response.data);
       throw e;
     }
   }

@@ -47,7 +47,6 @@ const mutations = {
 
 const actions = {
   async [actionTypes.addSleep]({ commit }, { sleepData }) {
-    console.log(sleepData);
     try {
       commit(mutationTypes.addSleepStart);
       await sleepApi.add(sleepData);
