@@ -1,7 +1,11 @@
 <template>
   <el-row class="header el-menu el-menu--horizontal">
     <div class="left-area">
-      <router-link :to="{ name: 'data' }" custom v-slot="{ navigate }">
+      <router-link
+        :to="{ name: isAuth ? 'data' : 'welcome' }"
+        custom
+        v-slot="{ navigate }"
+      >
         <h1 @click="navigate" class="logo">
           Линия жизни
         </h1>
@@ -69,13 +73,10 @@ export default {
   },
   methods: {
     logout() {
-      this.$store
-        .dispatch(actionTypes.logout)
-        .then(() => {
-          if (this.$route.name !== "welcome")
-            this.$router.push({ name: "welcome" });
-        })
-        .catch(() => {});
+      this.$store.dispatch(actionTypes.logout).then(() => {
+        if (this.$route.name !== "welcome")
+          this.$router.push({ name: "welcome" });
+      });
     }
   }
 };

@@ -1,4 +1,5 @@
 import pulseApi from "@/api/pulse";
+import { mutationTypes as authMutationTypes } from "@/store/auth";
 
 export const getterTypes = {
   pulseList: "[pulse list] pulse list",
@@ -37,6 +38,11 @@ const mutations = {
   },
   [mutationTypes.getPulseListFailure](state) {
     state.isLoading = false;
+  },
+
+  [authMutationTypes.logoutStart](state) {
+    state.data = null;
+    state.data = null;
   }
 };
 

@@ -1,4 +1,5 @@
 import temperatureApi from "@/api/temperature";
+import { mutationTypes as authMutationTypes } from "@/store/auth";
 
 export const getterTypes = {
   temperatureList: "[temperature list] temperature list",
@@ -37,6 +38,11 @@ const mutations = {
   },
   [mutationTypes.getTemperatureListFailure](state) {
     state.isLoading = false;
+  },
+
+  [authMutationTypes.logoutStart](state) {
+    state.errors = null;
+    state.data = null;
   }
 };
 

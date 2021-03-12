@@ -8,6 +8,7 @@
         v-model="date"
         type="date"
         placeholder="Дата"
+        format="dd.MM.yyyy"
         class="add-form__input"
       />
       <span class="add-form__input-label">Количество часов</span>
@@ -50,9 +51,9 @@ export default {
   name: "AddPulseForm",
   data() {
     return {
-      date: null,
-      hours: null,
-      minutes: null
+      date: new Date(),
+      hours: 7,
+      minutes: 0
     };
   },
   computed: {

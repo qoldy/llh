@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="list__header">
-      <el-button @click="toggleAddForm" type="success">Добавить</el-button>
+      <el-button @click="toggleAddForm" type="success" round
+        >Добавить
+      </el-button>
     </div>
     <!-- Начало таблицы -->
     <el-table
@@ -21,7 +23,7 @@
             v-model="scope.row.newValues.measurement_time"
             :disabled="isTemperatureSubmitting"
             type="datetime"
-            format="dd.MM.yyyy hh:mm"
+            format="dd.MM.yyyy HH:mm"
             placeholder="Новое время"
           >
           </el-date-picker>
@@ -45,26 +47,28 @@
         </template>
       </el-table-column>
       <!-- Кнопки управления -->
-      <el-table-column label="Операции" width="130">
+      <el-table-column label="" width="130">
         <template slot-scope="scope">
           <template v-if="!scope.row.isEditing">
-            <!-- Кнопка редактирования -->
-            <el-button
-              @click="editTemperatureHandler(scope.$index)"
-              :disabled="isTemperatureSubmitting"
-              icon="el-icon-edit"
-              circle
-              plain
-            ></el-button>
-            <!-- Кнопка удаления -->
-            <el-button
-              @click="deleteTemperatureHandler(scope.$index)"
-              :disabled="isTemperatureSubmitting"
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              plain
-            ></el-button>
+            <div class="button-wrapper">
+              <!-- Кнопка редактирования -->
+              <el-button
+                @click="editTemperatureHandler(scope.$index)"
+                :disabled="isTemperatureSubmitting"
+                icon="el-icon-edit"
+                circle
+                plain
+              ></el-button>
+              <!-- Кнопка удаления -->
+              <el-button
+                @click="deleteTemperatureHandler(scope.$index)"
+                :disabled="isTemperatureSubmitting"
+                type="danger"
+                icon="el-icon-delete"
+                circle
+                plain
+              ></el-button>
+            </div>
           </template>
           <template v-else>
             <!-- Кнопка отмены редактирования -->
@@ -226,7 +230,19 @@ export default {
 
 <style scoped>
 .list__header {
-  text-align: right;
+  text-align: left;
+}
+
+.button-wrapper {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  transition-delay: 0.3s;
+}
+
+.el-table__row:hover .button-wrapper {
+  opacity: 1;
+  pointer-events: unset;
 }
 
 .add-form__layer {

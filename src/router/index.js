@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "@/store/index";
 import { getterTypes, actionTypes } from "@/store/auth";
+import ElementUI from "element-ui";
 
 Vue.use(VueRouter);
 
@@ -84,6 +85,7 @@ router.beforeEach(async (to, from, next) => {
       if (isAuth) {
         next();
       } else {
+        ElementUI.Message.error("Необходимо выполнить вход");
         next({ name: "login" });
       }
     }

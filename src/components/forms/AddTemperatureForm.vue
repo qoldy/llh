@@ -8,7 +8,7 @@
         v-model="measurementTime"
         type="datetime"
         placeholder="Дата и время"
-        default-time="12:00:00"
+        format="dd.MM.yyyy HH:mm"
         class="add-form__input"
       >
       </el-date-picker>
@@ -44,8 +44,8 @@ export default {
   name: "AddTemperatureForm",
   data() {
     return {
-      measurementTime: null,
-      value: null
+      measurementTime: new Date(),
+      value: 36.6
     };
   },
   computed: {

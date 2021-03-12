@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="list__header">
-      <el-button @click="toggleAddForm" type="success">Добавить</el-button>
+      <el-button @click="toggleAddForm" type="success" round
+        >Добавить
+      </el-button>
     </div>
     <el-table
       :data="localPulseList"
@@ -27,7 +29,7 @@
         </template>
       </el-table-column>
       <!-- Значение пульса -->
-      <el-table-column prop="value" label="Значение">
+      <el-table-column prop="value" label="Пульс">
         <template slot-scope="scope">
           <span v-if="!scope.row.isEditing">{{ scope.row.value }}</span>
           <el-input-number
@@ -41,26 +43,31 @@
         </template>
       </el-table-column>
       <!-- Кнопки управления -->
-      <el-table-column label="Операции" width="130">
+      <el-table-column label="" width="130">
         <template slot-scope="scope">
           <template v-if="!scope.row.isEditing">
-            <el-button
-              @click="editPulseHandler(scope.row.id)"
-              :disabled="isPulseSubmitting"
-              icon="el-icon-edit"
-              circle
-              plain
-            ></el-button>
-            <el-button
-              @click="deletePulseHandler(scope.row.id)"
-              :disabled="isPulseSubmitting"
-              type="danger"
-              icon="el-icon-delete"
-              circle
-              plain
-            ></el-button>
+            <div class="button-wrapper">
+              <!-- Кнопка редактирования -->
+              <el-button
+                @click="editPulseHandler(scope.row.id)"
+                :disabled="isPulseSubmitting"
+                icon="el-icon-edit"
+                circle
+                plain
+              ></el-button>
+              <!-- Кнопка удаления -->
+              <el-button
+                @click="deletePulseHandler(scope.row.id)"
+                :disabled="isPulseSubmitting"
+                type="danger"
+                icon="el-icon-delete"
+                circle
+                plain
+              ></el-button>
+            </div>
           </template>
           <template v-else>
+            <!-- Кнопка отмены редактирования -->
             <el-button
               @click="cancelEditPulseHandler(scope.row.id)"
               :disabled="isPulseSubmitting"
@@ -68,6 +75,7 @@
               circle
               plain
             ></el-button>
+            <!-- Кнопка сохраения изменений -->
             <el-button
               @click="submitPulseHandler(scope.row.id)"
               :disabled="isPulseSubmitting"
@@ -216,7 +224,19 @@ export default {
 
 <style scoped lang="scss">
 .list__header {
-  text-align: right;
+  text-align: left;
+}
+
+.button-wrapper {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  transition-delay: 0.3s;
+}
+
+.el-table__row:hover .button-wrapper {
+  opacity: 1;
+  pointer-events: unset;
 }
 
 .add-form__layer {

@@ -1,4 +1,5 @@
 import sleepApi from "@/api/sleep";
+import { mutationTypes as authMutationTypes } from "@/store/auth";
 
 export const getterTypes = {
   sleepList: "[sleep list] sleep list",
@@ -37,6 +38,11 @@ const mutations = {
   },
   [mutationTypes.getSleepListFailure](state) {
     state.isLoading = false;
+  },
+
+  [authMutationTypes.logoutStart](state) {
+    state.data = null;
+    state.errors = null;
   }
 };
 
