@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.2.xsd">
+
+
+    <changeSet id="1.0.0" author="oleg.mashirov">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.1" author="oleg.mashirov">
+        <createTable tableName="roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.2" author="oleg.mashirov">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="BIGINT"></column>
+            <column name="role_id" type="BIGINT"></column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.3" author="oleg.mashirov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_roles_user"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="1.0.4" author="oleg.mashirov">
+        <addForeignKeyConstraint baseColumnNames="role_id"
+                                 baseTableName="user_roles"
+                                 constraintName="fk_user_roles_roles"
+                                 onDelete="CASCADE"
+                                 onUpdate="RESTRICT"
+                                 referencedColumnNames="id"
+                                 referencedTableName="roles"/>
+    </changeSet>
+
+    <changeSet id="1.0.5" author="oleg.mashirov">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="1.0.6" author="oleg.mashirov">
+        <createTable tableName="personal">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="full_name" type="VARCHAR(100)">
+                <!--<constraints nullable="false"/>-->
+            </column>
+            <column name="address" type="VARCHAR(200)"/>
+            <column name="policy" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.7" author="oleg.mashirov">
+        <createTable tableName="parameters">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="birth_date" type="TIMESTAMP">
+                <!--<constraints nullable="false"/>-->
+            </column>
+            <column name="gender" type="VARCHAR(200)">
+                <!--<constraints nullable="false"/>-->
+            </column>
+            <column name="height" type="INT">
+                <!--<constraints nullable="false"/>-->
+            </column>
+            <column name="weight" type="DOUBLE">
+                <!--<constraints nullable="false"/>-->
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.8" author="oleg.mashirov">
+        <createTable tableName="pressure">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="systolic" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="diastolic" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.9" author="oleg.mashirov">
+        <createTable tableName="pulse">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="pulse" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.10" author="oleg.mashirov">
+        <createTable tableName="sleep_time">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sleep_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.11" author="oleg.mashirov">
+        <createTable tableName="temperature">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="temperature" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.0.12" author="oleg.mashirov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="pressure"
+                                 constraintName="fk_user_id_pressure"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="1.0.13" author="oleg.mashirov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="pulse"
+                                 constraintName="fk_user_id_pulse"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="1.0.14" author="oleg.mashirov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="sleep_time"
+                                 constraintName="fk_user_id_sleep_time"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+    <changeSet id="1.0.15" author="oleg.mashirov">
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="temperature"
+                                 constraintName="fk_user_id_temperature"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+    </changeSet>
+
+
+
+
+</databaseChangeLog>
