@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <NumberPicker
+        android:id="@+id/day_picker"
+        android:layout_width="60dp"
+        android:layout_height="100dp"/>
+    <NumberPicker
+        android:id="@+id/month_picker"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:layout_toEndOf="@id/day_picker"/>
+    <NumberPicker
+        android:id="@+id/year_picker"
+        android:layout_width="60dp"
+        android:layout_height="100dp"
+        android:layout_toEndOf="@id/month_picker"/>
+    <CheckBox
+        android:id="@+id/male_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/day_picker"/>
+    <CheckBox
+        android:id="@+id/female_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/male_box"/>
+    <EditText
+        android:id="@+id/height_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/female_box"/>
+    <EditText
+        android:id="@+id/weight_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/height_field"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/confirm"
+        android:layout_below="@id/weight_field"
+        android:onClick="onConfirmParametersClicked"/>
+
+
+</RelativeLayout>

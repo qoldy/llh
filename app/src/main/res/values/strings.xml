@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Линия Жизни</string>
+    <string name="sign_in">Вход в аккаунт</string>
+    <string name="sign_up">Регистрация</string>
+    <string name="confirm">Подтвердить</string>
+    <string name="pulse">Пульс</string>
+
+</resources>
