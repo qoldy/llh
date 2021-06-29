@@ -9,9 +9,9 @@ class FillPersonalPresenter(private val fillPersonalView:FillPersonalContract.Vi
     private val personalModel=PersonalModel()
     private val userModel=UserModel()
     fun fillPersonal() {
-        var fullName=fillPersonalView.getFullName()
-        var address=fillPersonalView.getAddress()
-        var policy=fillPersonalView.getPolicy()
+        val fullName=fillPersonalView.getFullName()
+        val address=fillPersonalView.getAddress()
+        val policy=fillPersonalView.getPolicy()
         personalModel.putPersonal(userModel.getUserId(),
                 Personal(fullName, address, policy),
                 this

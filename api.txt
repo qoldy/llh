@@ -1,0 +1,81 @@
+    • api/auth/login ||Post
+Request:
+“username”: ….
+“password”: ….
+Response:
+“id”: ….
+“username”: ….
+“token”: ….	
+    • api/auth/register ||Post
+Request:
+“username”: ….
+“email”: ….
+“password”: ….
+Response:
+Email Exception:
+	“status”: 230 (в теле json)
+Username Exception:
+	“status”: 231(в теле json)
+Ok:
+	“status”: 200 (в теле json)
+	“id”: ….
+“username”: ….
+“token”: ….
+    • api/users/parameters/{id} ||Get
+Response:
+	“birth_date”: ….
+	“gender”: …. (договаривайтесь сами в каком формате будете хранить это. мне пофиг. для меня строка!)
+	“height”: ….
+	“weight”: ….
+    • api/users/personal/{id} ||Get
+Response:
+	“full_name”: ….
+	“address”: ….
+	“policy”: ….
+    • api/users/parameters/{id} ||Put
+Request:
+	“birth_date”: ….
+	“gender”: …. (договаривайтесь сами в каком формате будете хранить это. мне пофиг. для меня строка!)
+	“height”: ….
+	“weight”: ….
+Response:
+	“birth_date”: ….
+	“gender”: …. (договаривайтесь сами в каком формате будете хранить это. мне пофиг. для меня строка!)
+	“height”: ….
+	“weight”: ….
+    • api/users/personal/{id} ||Put
+Request:
+	“full_name”: ….
+	“address”: ….
+	“policy”: ….
+Response:
+	“full_name”: ….
+	“address”: ….
+	“policy”: ….
+    • api/constant/(pulse, pressure, sleep, temperature)/{id} ||Get All
+Pressure:
+	“systolic”: ….
+	“diastolic”: ….
+Pulse:
+	“pulse”: ….
+SleepTime:
+	“sleep_time”: ….
+Temperature:
+	“temperature”: ….
+Response:
+	“user_id”: ….
+	“date_time”: ….
+	(сам показатель в зависимости от константы, как написано выше)
+    • api/constant/(pulse, pressure, sleep, temperature) ||Post
+Request:
+	“user_id”: ….
+	“date_time”: ….
+(сам показатель в зависимости от константы, как написано выше)
+	Response:
+		Только статус код.
+    • api/constant/(pulse, pressure, sleep, temperature)/{id} ||Put
+Request:
+(сам показатель в зависимости от константы, как написано выше)
+	Response: 
+		Только статус код.
+

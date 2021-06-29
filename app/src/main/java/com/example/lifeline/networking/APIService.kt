@@ -9,6 +9,7 @@ import com.example.lifeline.networking.post.response.SignInResponse
 import com.example.lifeline.networking.post.response.SignUpResponse
 import io.reactivex.Completable
 import io.reactivex.Observable
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.PUT
@@ -16,7 +17,7 @@ import retrofit2.http.Path
 
 interface APIService {
     @POST("auth/login")
-    fun signIn(@Body body: SignInRequest):Observable<SignInResponse>
+    fun signIn(@Body body: SignInRequest):Observable<Response<SignInResponse>>
 
     @POST("auth/register")
     fun signUp(@Body body: SignUpRequest):Observable<SignUpResponse>

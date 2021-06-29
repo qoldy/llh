@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_not_correct_username">Некорректный логин/email</string>
+    <string name="error_not_correct_password">Некорректный пароль</string>
+    <string name="error_empty_username">Не введен логин/email</string>
+    <string name="error_empty_password">Не введен пароль</string>
+    <string name="error_internet_connection">Ошибка при соединении с сервером</string>
+    <string name="error_user_not_found">Пользователь с таким логином/email не найден</string>
+    <string name="error_wrong_password">Неправильный пароль</string>
+</resources>
