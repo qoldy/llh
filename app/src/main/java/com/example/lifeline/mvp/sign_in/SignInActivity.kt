@@ -34,9 +34,7 @@ class SignInActivity:AppCompatActivity(), SignInContract.View {
         presenter.signIn()
     }
 
-    override fun showError(error:String) {
-        errorText.text=error
-    }
+    override fun showError(error:String) { errorText.text=error }
 
     override fun onSuccess()  {
         val intent = Intent(this, MenuActivity::class.java)

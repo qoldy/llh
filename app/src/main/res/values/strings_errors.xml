@@ -1,10 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_not_correct_username">Некорректный логин/email</string>
-    <string name="error_not_correct_password">Некорректный пароль</string>
-    <string name="error_empty_username">Не введен логин/email</string>
-    <string name="error_empty_password">Не введен пароль</string>
-    <string name="error_internet_connection">Ошибка при соединении с сервером</string>
-    <string name="error_user_not_found">Пользователь с таким логином/email не найден</string>
-    <string name="error_wrong_password">Неправильный пароль</string>
+<!--    Общие ошибки-->
+    <string name="err_internet_connection">Ошибка при соединении с сервером</string>
+
+<!--    Ошибки при авторизации-->
+    <string name="err_auth_not_correct_username">Некорректный логин/email</string>
+    <string name="err_auth_not_correct_password">Некорректный пароль</string>
+    <string name="err_auth_empty_username">Не введен логин/email</string>
+    <string name="err_auth_empty_password">Не введен пароль</string>
+    <string name="err_auth_user_not_found">Пользователь с таким логином/email не найден</string>
+    <string name="err_auth_wrong_password">Неправильный пароль</string>
+
+<!--    Ошибки при регистрации-->
+    <string name="err_reg_username_exist">Пользователь с таким логином уже существует</string>
+    <string name="err_reg_email_exist">Пользователь с таким email уже существует</string>
+    <string name="err_reg_empty_username">Не введен логин</string>
+    <string name="err_reg_empty_email">Не введен email</string>
+    <string name="err_reg_empty_password">Не введен пароль</string>
+    <string name="err_reg_email_not_match">Некорректный email</string>
+    <string name="err_reg_login_not_match">Некорректный логин\n
+        Логин может содержать только латинские буквы, цифры, точку и нижнее подчеркивание\n
+        Длина логина должна превышать 4 символа
+    </string>
+    <string name="err_reg_password_not_match">Некорректный пароль\n
+        Пароль может содержать только латинские буквы, цифры, точку и нижнее подчеркивание\n
+        Длина пароля должна превышать 4 символа
+    </string>
+    <string name="err_reg_password_not_confirmed">
+        Пароль не совпадает с полем подтверждения
+    </string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.lifeline.mvp.sign_in
 
-import android.util.Log
 import android.util.Patterns
 import com.example.lifeline.R
 import com.example.lifeline.data.User
@@ -12,7 +11,6 @@ import com.example.lifeline.utils.PrefHelper
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import retrofit2.HttpException
 import retrofit2.Response
 
 class SignInPresenter(private val signInView: SignInContract.View): SignInContract.Presenter {
@@ -30,25 +28,19 @@ class SignInPresenter(private val signInView: SignInContract.View): SignInContra
     //Проверка ввода
     private fun checkInput():Boolean{
         //Пустые поля
-        if(login==""){
-            signInView.showError(signInView.getContext().getString(R.string.error_empty_username))
-            return false
-        }
-        if(password==""){
-            signInView.showError(signInView.getContext().getString(R.string.error_empty_password))
-            return false
-        }
+        if(login==""){ signInView.showError(signInView.getContext().getString(R.string.err_auth_empty_username)); return false }
+        if(password==""){ signInView.showError(signInView.getContext().getString(R.string.err_auth_empty_password)); return false }
+
         //Некорректная почта/логин
         val regex = Regex("^(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$")
-        if(!Patterns.EMAIL_ADDRESS.matcher(login).matches()&&!regex.matches(login)){
-            signInView.showError(signInView.getContext().getString(R.string.error_not_correct_username))
+        if(!Patterns.EMAIL_ADDRESS.matcher(login).matches()&&!regex.matches(login)) {
+            signInView.showError(signInView.getContext().getString(R.string.err_auth_not_correct_username))
             return false
         }
+
         //Некорректный пароль
-        if(!regex.matches(password)){
-            signInView.showError(signInView.getContext().getString(R.string.error_not_correct_password))
-            return false
-        }
+        if(!regex.matches(password)){ signInView.showError(signInView.getContext().getString(R.string.err_auth_not_correct_password)); return false }
+
         return true
     }
 
@@ -69,7 +61,7 @@ class SignInPresenter(private val signInView: SignInContract.View): SignInContra
 
     //Ошибка в результате запроса
     private fun onError(error:Throwable) {
-        signInView.showError(signInView.getContext().getString(R.string.error_internet_connection))
+        signInView.showError(signInView.getContext().getString(R.string.err_internet_connection))
     }
 
     //Ответ от сервера
@@ -86,15 +78,15 @@ class SignInPresenter(private val signInView: SignInContract.View): SignInContra
         when {
             //Пользователь не найден
             response.code()==403 -> {
-                signInView.showError(signInView.getContext().getString(R.string.error_user_not_found))
+                signInView.showError(signInView.getContext().getString(R.string.err_auth_user_not_found))
             }
             //Неправильный пароль
             response.code()==401 -> {
-                signInView.showError(signInView.getContext().getString(R.string.error_wrong_password))
+                signInView.showError(signInView.getContext().getString(R.string.err_auth_wrong_password))
             }
             //Иные ошибки, пока что списываем на соединение с сервером
             else -> {
-                signInView.showError(signInView.getContext().getString(R.string.error_internet_connection))
+                signInView.showError(signInView.getContext().getString(R.string.err_internet_connection))
             }
         }
     }

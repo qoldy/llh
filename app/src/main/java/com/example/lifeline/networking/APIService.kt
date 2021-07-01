@@ -16,11 +16,13 @@ import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface APIService {
+    //Вход в аккаунт
     @POST("auth/login")
     fun signIn(@Body body: SignInRequest):Observable<Response<SignInResponse>>
 
+    //Регистрация
     @POST("auth/register")
-    fun signUp(@Body body: SignUpRequest):Observable<SignUpResponse>
+    fun signUp(@Body body: SignUpRequest):Observable<Response<SignUpResponse>>
 
     @PUT("users/personal/{id}")
     fun putPersonal(@Path("id") id:Long, @Body request: Personal):Observable<Personal>

@@ -1,8 +1,10 @@
 package com.example.lifeline.mvp.sign_up
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.lifeline.R
 
@@ -11,6 +13,7 @@ class SignUpActivity:AppCompatActivity(), SignUpContract.View {
     private lateinit var passwordField: EditText
     private lateinit var emailField: EditText
     private lateinit var confirmField: EditText
+    private lateinit var errorText: TextView
     private lateinit var presenter: SignUpPresenter
 
 
@@ -29,29 +32,22 @@ class SignUpActivity:AppCompatActivity(), SignUpContract.View {
     }
 
     fun onConfirmSignUpClicked(view: View){
+        errorText.text=""
         presenter.signUp()
     }
 
-    override fun showError() {
-
-    }
+    override fun showError(error: String) { errorText.text=error}
 
     override fun onSuccess() {
     }
 
-    override fun getEmail(): String {
-        return emailField.text.toString()
-    }
+    override fun getEmail(): String { return emailField.text.toString() }
 
-    override fun getLogin(): String {
-        return loginField.text.toString()
-    }
+    override fun getLogin(): String { return loginField.text.toString() }
 
-    override fun getPassword(): String {
-        return passwordField.text.toString()
-    }
+    override fun getPassword(): String { return passwordField.text.toString() }
 
-    override fun getConfirm(): String {
-        return confirmField.text.toString()
-    }
+    override fun getConfirm(): String { return confirmField.text.toString() }
+
+    override fun getContext(): Context { return this }
 }
